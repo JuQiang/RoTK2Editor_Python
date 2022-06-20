@@ -8,9 +8,11 @@
 
 ## 参考资料
 
-陆续找到了一些资料，有国内的VAN的，有韩国人的，又一个日本人的，有一个老美的专门论坛的。数据结构基本都搞清楚了，尤其是武将头像部分，耗费了我不少时间。
+陆续找到了一些资料，有国内的轩辕路谈的，韩国人的，有一个日本人的，有一个老美的专门论坛的。数据结构基本都搞清楚了，尤其是武将头像部分，耗费了我不少时间。
 
 [三国志系列图像格式浅析](http://xycq.online/forum/redirect.php?tid=34607&goto=lastpost&highlight=)
+
+[VAN大神的分析](https://github.com/myevan/rtk)
 
 [一个日本哥们写的，war map那段挺有帮助](https://geolog.mydns.jp/www.geocities.jp/aiharatomoya/san2/san2.htm)
 

@@ -1,0 +1,246 @@
+将领信息
+
+将领总数：255之内
+将领偏移起始地址：0x20
+每个将领大小：0x2B
+0x00～0x01：此值减去0x38，是同城市下一个将领的偏移量
+0x02～0x02：高4个字节是否死亡，低4个字节是否可以移动
+0x03～0x03：高4个字节是否内应，低4个字节是否生病
+0x04～0x04：智力
+0x05～0x05：战力
+0x06～0x06：号召
+0x07～0x07：义理
+0x08～0x08：仁德
+0x09～0x09：野望
+0x0A～0x0A：主公编号，0x20+此值乘以0x2B就是主公地址
+0x0B～0x0B：忠诚
+0x0C～0x0C：侍卫
+0x0D～0x0D：埋伏势力
+0x0E～0x0E：埋伏城市
+0x0F～0x0F：相性
+0x10～0x11：血缘
+0x12～0x13：士兵
+0x14～0x15：武器
+0x16～0x16：训练
+0x17～0x18：【未知】
+0x19～0x19：出生年份
+0x1A～0x1B：此值减1是头像偏移。如果小于219，则是标准头像；否则是拼接头像
+0x1C～0x1D：姓名第一个字索引，如果是英文则对应为ASCII码
+0x1E～0x1F：姓名第二个字索引，如果是英文则对应为ASCII码
+0x20～0x21：姓名第三个字索引，如果是英文则对应为ASCII码
+0x22～0x23：姓名第四个字索引，如果是英文则对应为ASCII码
+0x24～0x25：姓名第五个字索引，如果是英文则对应为ASCII码
+0x26～0x27：姓名第六个字索引，如果是英文则对应为ASCII码
+0x28～0x29：姓名第七个字索引，如果是英文则对应为ASCII码
+0x2A～0x2A：【未知】
+
+taiki.dat
+0x06开始，每个将领长度为0x2E
+0x00~0x00：出生年份
+0x01~0x01：血缘
+0x02~0x02：登录郡
+0x03开始，与上面将领资料相同了。
+
+Officer Data Structure from game save data
+
+
+
+1st officer starts from 0x20, it have a 0x2B size data structure. 
+
+
+
+0x00~0x01: value sub 0x38 point to a next officer who in the same province. Value 0 means this is the last officer in the province officers' chain table.
+
+0x02~0x02: bit0~3 means whether officer can move; bit 4~7 means whether officer is dead.
+
+0x03~0x03: bit 0~3 means whether sick; bit 4~7 means whether is a spy.
+
+0x04~0x04: int
+
+0x05~0x05: war
+
+0x06~0x06: chm
+
+0x07~0x07: 义理, not clearly yet
+
+0x08~0x08: 仁德, not clearly yet
+
+0x09~0x09: 野望, not clearly yet
+
+0x0A~0x0A: The ruler's no. 0 means ruler at 0x2AFC+0 * 0x29, 5 means ruler at 0x2AFC + 5* 0x29, etc.
+
+0x0B~0x0B: loyalty
+
+0x0C~0x0C: number of guards
+
+0x0D~0x0D: ruler no who the officer act a spy served
+
+0x0E~0x0E: province no who the officer act a spy stayed
+
+0x0F~0x0F: 相性, not clearly yet
+
+0x10~0x11: 血缘, not clearly yet
+
+0x12~0x13: number of soliders, change the value to 0x2710 means a 10000 solders.
+
+0x14~0x15: number of weapons
+
+0x16~0x16: training level, max is 100
+
+0x17~0x18: unknown
+
+0x19~0x19: officer birth year
+
+0x1A~0x1B: value sub 1 point to a portrait information. If less then 219, this is a standard portrait, u can find face information from kaodata.dat. Otherwise, this is a generic portrait, u can find face info from montage.dat.
+
+0x1C~0x1D: 1st index point to name. An ascii means this is a English name. Otherwise it points to a 16*14 customized font information.
+
+0x1E~0x1F: 2nd index
+
+0x20~0x21: 3nd index
+
+0x22~0x23: 4nd index
+
+0x24~0x25: 5nd index
+
+0x26~0x27: 6nd index
+
+0x28~0x2A: unknown
+
+
+
+======================
+
+in file "taiki.dat", officer information starts from 0x06, every officer has a length 0x2E data structure.
+
+0x00~0x00: birth year
+
+0x01~0x01: 血缘
+
+0x02~0x02: province which the officer will appear
+
+Same as the prior officer data structure who starts from 0x03 end to a length 0x2B structure .
+
+
+
+====================
+
+in file "scenario.dat", stored 6 periods officers information.
+
+Year 189,194,201,208,215,220, and correspoding officer chain table starts from 0x16, 0x33C5, 0x6774, 0x9B23, 0xCED2, 0x10281
+
+
+Province Data Structure from game save data
+
+Province data starts from 0x2D8C, total 41 provinces, every province has a length 0x23 data array.
+
+0x00~0x01: this value points to next province which belog to the same ruler.
+0x02~0x03: this value sub 0x38 points to the province's governor.
+0x04~0x05: this value sub 0x38 points to the "1st" unclaimed officer. U can find 2nd unclaimed officer from the "1st" unclaimed officer's "next officer" column. And u can find 3rd unclaimed officer throught this chain style, etc.
+0x06~0x07: this value sub 0x38 points to the "1st" free officer. U can find 2nd/3rd... by the prior method.
+0x08~0x09: gold in this province. The max value is 30,000  or 0x7530
+0x0A~0x0D: rice number. The max value is 3,000,000 or 0x002DC6C0
+0x0E~0x0F: the value multipiled by 100 means populations
+0x10~0x10: the ruler no.
+0x11~0x11: the ruler no who has war with u
+0x12: delegate control. 0 means no delegate; 4 means delegate all; 5 means delegate economy; 6 means delegate military; 7 means delegate officers;
+0x13~0x13: unknown
+0x14~0x14: the target war province no if this province has a delegate control 5 or 0
+0x15~0x15: the target province which this province will send gold&rice 
+0x16~0x16: land price
+0x17~0x17: people loyalty
+0x18~0x18: flood control
+0x19~0x19: horses humber
+0x1A~0x1A: cost number
+0x1B~0x1B: rice price
+0x1C~0x1F: unknown
+0x20~0x20: X no in world map of this province
+0x21~0x21: Y no in world map of this province
+
+
+World map is a 2-dimensional array which contains 9 rows and 8 columns .
+
+ 	　０	　１	　２	　３	　４	　５	　６	　７
+０	 	 	 	 	 	　２	　１	 
+１	 	 	 	　４	　３	　６	 	 
+２	 	 	 	　５	　７	　９	　８	 
+３	１５	 	 	１１	１０	１７	１６	２４
+４	１４	１３	１２	２０	１９	２８	１８	２５
+５	 	３０	２９	３１	２１	２２	２７	２６
+６	 	３３	３２	４０	２３	３８	３７	 
+７	 	３５	３４	４１	３９	 	 	 
+８	 	 	３６	 	 	 	 	 
+
+x=6 and y=0 means province 1.
+x=5 and y=0 means province 2.
+x=3 and y=7 means province 41, etc.
+
+0x22~0x22: province name index
+province name list in Chinese language, starts from 0
+幽州	幷州	冀州	青州	兗州	司州	雍州	涼州	徐州	予州	荊州	揚州	益州	交州
+
+province 1 has a name index 0, so it's full name is 幽州-1
+province 10 has a name index 5, so it's full name is 司州-10
+
+
+
+Portrait information
+
+In the officer data structure, value from offset 0x1A~0x1B sub 1 point to a officer portrait location. The game has 2 types portrait: Individual and generic. 
+If the prior value less then 219, then the officer has his individual portrait, otherwise it's a generic portraic which is comibed by several generic parts.
+
+====================
+An individual portrait
+
+Every portrait has a 960 bytes data array. KOEI used 8 colors in the game, every 3 bytes contain 24 bit. Every 3 bit construct a new byte, the bit 0 in this new byte is bit 0 in 1st byte, the bit 1 in this new byte is bit 0 in 2nd byte, and the bit 2 in this new byte is bit 0 in 3rd byte.
+Because the new byte has a 3 bit size , so it's max size is 0x111=7, min size = 0, total 8 colors. So, every 3 bytes standard for 8 pixels color. 960 bytes stand for 960/3*8=2560 pixels color.
+
+Here's my python code
+face_buf = []
+face = RoTK2.KAODATA[index * 960:index * 960 + 960]
+for i in range(0,len(face),3):
+	a = "{0:b}".format(face[i+0]).zfill(8)
+           b = "{0:b}".format(face[i+1]).zfill(8)
+           c = "{0:b}".format(face[i+2]).zfill(8)
+           for j in range(0,8):
+           	face_buf.append(int(a[j]+b[j]+c[j],2))
+
+KOEI use a color pallete to transform these face_buf data. There's a serious issue in many topics which discuss the color pallete.
+a href ref is here: http://xycq.online/forum/redirect.php?tid=34607&goto=lastpost&highlight=
+
+It's not a BGR format , even not a RGB format, it's a RBG format!
+colors = [wx.Colour("#000000"), wx.Colour("#50ff50"), wx.Colour("#ff5050"), wx.Colour("#ffff50"),
+                  wx.Colour("#5050f8"), wx.Colour("#50fff8"), wx.Colour("#ff50f8"), wx.Colour("#fffff8")]
+
+For every "byte" in face_buf, we can get the true color by the "byte" as a index from the prior color pallete data. For example, 1 means wx.Colour("#50ff50"),7 means wx.Colour("#fffff8").
+
+The portrait in PC version RoTK2, size is 64pixels width and 40 pixels height. Because every 3 bytes stand for 8 pixels color, so 64 means 64/8*3=24 bytes in the original portrait data.
+
+At last, the RoTK2 re-scale the portrait size from 64*40 to 40*64.
+
+====================
+An generic portrait
+
+This is the most complex part ,I tried every pixel to find the right pixels format.
+The 2 bytes portrait index contains 16 bits.
+
+Bit 0~3: 100 means a warlord , and 110 means a civilian
+Bit 3~4: mouse pointer, which have 18*4 = 72 pixels height
+Bit 5~6: nose pointer, which have 22*4 = 88 pixels height
+Bit 7~8: eye pointer, which have 8*4 = 32 pixels height
+Bit 9~10: upper face pointer, which have 10*4 = 40 pixels height
+Bit 11~12: lower face pointer, which have 8*4 = 32 pixels height
+
+the total size is (72+88+32+40+32)*3/8 = 33 bytes
+
+Bit 13~15: group index. The 2 bytes portrait index point to this "group index" multipiled by  33 to "group index" plus 33 + 33
+
+And , the same method to build a new face_data array, use the same color palette.
+To draw this generic face,
+1st: draw a 18 pixels height by using upper face data
+2nd: draw a 22 pixels height by using lower face data
+3rd: draw a 8 pixels height by using eye data. Please pay attention! If the color is 0, then do nothing. In fact, it's a simple mask.
+4th: draw a 8 pixels height by using nose data. Please pay attention! If the color is 0, then do nothing. In fact, it's a simple mask.
+5th: draw a 10 pixels height by using mouse data. Please pay attention! If the color is 0, then do nothing. In fact, it's a simple mask.
+
+And, the portrait will also re-scale from 64*40 to 40*64.

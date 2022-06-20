@@ -31,11 +31,20 @@
 [github上能找到的唯一一个修改器，韩国哥们写的](https://github.com/brokenpc00/RoTK2_Editor_React)
 
 ## 主要功能
+主界面长这个样子
+![主界面](https://github.com/JuQiang/RoTK2Editor_Python/blob/master/Demo/%E4%B8%BB%E7%95%8C%E9%9D%A2.png)
+
 1. 可以把某个诸侯的全部城市都设置为经济最优，包括但不限于：黄金=30000，粮食=3000000等；军事最优：所有人的智力战力号召都是100，训练100，士兵10000等。
 2. 可以把某个城市的经济和军事设置为最优，同上。也可以单独优化某个武将。
 3. 可以把某个城市集体投降到另一个诸侯手下。
 4. 可以查看全国地图及城市地图。
+![郡地图](https://github.com/JuQiang/RoTK2Editor_Python/blob/master/Demo/%E6%9F%A5%E7%9C%8B%E9%83%A1%E5%9C%B0%E5%9B%BE.png)
+![全国地图](https://github.com/JuQiang/RoTK2Editor_Python/blob/master/Demo/%E4%B8%96%E7%95%8C%E5%9C%B0%E5%9B%BE.png)
 5. 可以查看所有武将信息。
+![](https://github.com/JuQiang/RoTK2Editor_Python/blob/master/Demo/%E9%BB%98%E8%AE%A4%E6%AD%A6%E5%B0%86%E4%BF%A1%E6%81%AF.png)
+6. 可以查看联盟关系
+![联盟关系](https://github.com/JuQiang/RoTK2Editor_Python/blob/master/Demo/%E8%81%94%E7%9B%9F%E5%85%B3%E7%B3%BB.png)
+
 
 ## 技术难点
 1. 武将分为大众脸和专用脸。后者见DrawFace，前者见DrawGenericFace。8bit的颜色，用3个byte来表示，具体解析见代码。大众脸，是一些列的眼睛、鼻子、嘴组合起来的。
